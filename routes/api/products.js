@@ -13,20 +13,23 @@ const productRef = ref(database, productCollections);
 
 //const data_centerRef = collection(firestore, "data_center");
 
-router.get("/", async (req, res) => {
+router.get("/head/:id", async (req, res) => {
 
   // const querySnapshot = await getDocs(collection(firestore, "data_center"));
   // querySnapshot.forEach(async (doc) => {
   //   mainDocs.push({ ...doc.data(), _id: doc.id });
   // });
   // //console.log(mainDocs)
-  const MapHead = []
-  const dbRef = ref(database, 'data_center');
+  const id = req.params.id;
+  if (!id) { return }
+
+  const dbRef = ref(database, 'data_center', equalTo("sub_categorie_id", "==", id));
 
   onValue(dbRef, (snapshot) => {
     const mainDocs = [];
     snapshot.forEach((childSnapshot) => {
       // const childKey = childSnapshot.key;
+      console.log(childSnapshot.val())
       mainDocs.push(childSnapshot.val());
       //console.log(childData)
     });
@@ -83,7 +86,7 @@ router.get("/", async (req, res) => {
       District: DistrictReading,
       'Sub-district': SubdistrictReading
     }
-   // console.log(MapHeadDATA)
+    // console.log(MapHeadDATA)
     //MapHead.push(MapHeadDATA)
     res.json(MapHeadDATA);
   }, {
