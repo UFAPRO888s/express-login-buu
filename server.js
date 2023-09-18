@@ -10,7 +10,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-
 app.get("/research", async (req, res) => {
   // const { idx } = req.query;
  // const idx = "DRAGONBKK.CLUB";
@@ -42,6 +41,8 @@ app.get("/research", async (req, res) => {
 });
 
 
+
+
 app.use("/api/users/", users_api);
 app.use("/api/users/", auth_api);
 app.use("/api/products/", products_api);
@@ -58,7 +59,6 @@ app.use(function (error, req, res, next) {
     },
   });
 });
-
 
 
 
